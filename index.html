@@ -9,10 +9,11 @@
   <body>
     <h1>Welcome to BlackJack</h1>
     <p>Click Get Card!</p>
-    <button type="button" onclick="getfirstCard(); getsecondCard();">Start</button>
-    <button type="button" onclick>Hit</button>
-    <button type="button" onclick>Stay</button>
+    <button id = "startButton" type="button" onclick="getfirstCard(); getsecondCard();">Start</button>
+    <button id = "hitButton" type="button" onclick>Hit</button>
+    <button type="button" onclick="stayPlayerGame()">Stay</button>
     <button type="button" onclick="addCards()">Total</button>
+    <button id = "resetGame" type="button" onclick="resetGame()">Reset</button>
     <p id = "firstCard"></p>
     <p id = "secondCard"></p>
     <p id = "firstAdd"></p>
