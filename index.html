@@ -10,12 +10,13 @@
     <h1>Welcome to BlackJack</h1>
     <p>Click Get Card!</p>
     <button id = "startButton" type="button" onclick="getfirstCard(); getsecondCard();">Start</button>
-    <button id = "hitButton" type="button" onclick>Hit</button>
-    <button type="button" onclick="stayPlayerGame()">Stay</button>
-    <button type="button" onclick="addCards()">Total</button>
+    <button id = "hitButton" type="button" disabled onclick="hitCard()">Hit</button>
+    <button id = "stayButton" type="button" disabled onclick="stayPlayerGame()">Stay</button>
+    <button id = "totalButton" disabled type="button" onclick="addCards()">Total</button>
     <button id = "resetGame" type="button" onclick="resetGame()">Reset</button>
     <p id = "firstCard"></p>
     <p id = "secondCard"></p>
+    <p id = "thirdCard"></p>
     <p id = "firstAdd"></p>
   </body>
 </html>
