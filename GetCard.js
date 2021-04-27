@@ -9,6 +9,8 @@ var secondCardNumber;
 var newCard = 0;
 var startButton = document.getElementById("startButton");
 var totalCount = 0;
+var firstCount = 0;
+var totalCardNumber = [];
 
       function getfirstCard(){
         var randomSuit = suit[Math.floor(Math.random() * suit.length)];
@@ -16,9 +18,10 @@ var totalCount = 0;
         var cardNumber = Number(randomNumber);
         document.getElementById("firstCard").innerHTML = cardNumber + " " + "of" + " " + randomSuit;
         firstCardNumber = cardNumber;
+        totalCardNumber.push(firstCardNumber);
         document.getElementById("startButton").disabled = true;
         document.getElementById("hitButton").disabled = false;
-        document.getElementById("totalButton").disabled = false;
+        //document.getElementById("totalButton").disabled = false;
         document.getElementById("stayButton").disabled = false;
       }
 
@@ -28,29 +31,45 @@ var totalCount = 0;
         var cardNumber = Number(randomNumber);
         document.getElementById("secondCard").innerHTML = cardNumber + " " + "of" + " " + randomSuit;
         secondCardNumber = cardNumber;
+        totalCardNumber.push(secondCardNumber);
       }
       
-      function addCards(){    
-        totalCount = firstCardNumber + secondCardNumber + newCard;
-        document.getElementById("firstAdd").innerHTML = totalCount;
-         /* totalCount += newCard;
+      /*function addCards(){   
+        var sumOfCards = totalCardNumber.reduce(function(a, b){
+          return a + b;
+        }, 0);
+        //firstCount = firstCardNumber + secondCardNumber;
+        //totalCount = firstCount + newCard; 
+        document.getElementById("firstAdd").innerHTML = sumOfCards;
+          totalCount += newCard;
           document.getElementById("firstAdd").innerHTML = totalCount
-          */
+          
       }
-
+      */
       function hitCard(){
+        var p = document.createElement("P");
         var randomSuit = suit[Math.floor(Math.random() * suit.length)];
         var randomNumber = number[Math.floor(Math.random() * number.length)];
         var cardNumber = Number(randomNumber);
-        document.getElementById("thirdCard").innerHTML = cardNumber + " " + "of" + " " + randomSuit;
-        newCard = cardNumber;
+        var textNode = document.createTextNode(cardNumber + " " + "of" + " " + randomSuit);
+        p.appendChild(textNode);
+        document.getElementById("thirdCard").appendChild(p) //= cardNumber + " " + "of" + " " + randomSuit;
+        //newCard = cardNumber;
+        totalCardNumber.push(cardNumber);
+        var sumOfCards = totalCardNumber.reduce(function(a, b){
+          return a + b;
+        }, 0);
+        document.getElementById("firstAdd").innerHTML = sumOfCards;
 
+        if (sumOfCards > 21){
+          document.getElementById("lostMessage").innerHTML("You Went Over 21! Try Again.")
+        }
       }
       
       function resetGame(){
          document.getElementById("startButton").disabled = false; 
          document.getElementById("hitButton").disabled = true;
-         document.getElementById("totalButton").disabled = true;
+         //document.getElementById("totalButton").disabled = true;
          document.getElementById("stayButton").disabled = true;
          document.getElementById("firstCard").innerHTML = " "
          document.getElementById("secondCard").innerHTML = " "
@@ -58,6 +77,7 @@ var totalCount = 0;
          document.getElementById("firstAdd").innerHTML = " "
          totalCount = 0;
          newCard = 0;
+         totalCardNumber.splice(0, totalCardNumber.length);
 
       }
     
