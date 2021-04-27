@@ -61,8 +61,9 @@ var totalCardNumber = [];
         }, 0);
         document.getElementById("firstAdd").innerHTML = sumOfCards;
 
-        if (sumOfCards > 21){
-          document.getElementById("lostMessage").innerHTML("You Went Over 21! Try Again.")
+        if (sumOfCards >21){
+          document.getElementById("lostMessage").innerHTML = "You Went Over 21! Try Again.";
+          document.getElementById("hitButton").disabled = true;
         }
       }
       
@@ -75,6 +76,7 @@ var totalCardNumber = [];
          document.getElementById("secondCard").innerHTML = " "
          document.getElementById("thirdCard").innerHTML = " "
          document.getElementById("firstAdd").innerHTML = " "
+         document.getElementById("lostMessage").innerHTML = " "
          totalCount = 0;
          newCard = 0;
          totalCardNumber.splice(0, totalCardNumber.length);
@@ -83,6 +85,10 @@ var totalCardNumber = [];
     
       function stayPlayerGame(){
           document.getElementById("hitButton").disabled = true;
+          var sumOfCards = totalCardNumber.reduce(function(a, b){
+            return a + b;
+          }, 0);
+          document.getElementById("firstAdd").innerHTML = sumOfCards;
       }
 
     
@@ -94,3 +100,12 @@ var totalCardNumber = [];
         location.reload;
     }
     */
+      function getFirstDealerCard(){
+        var randomSuit = suit[Math.floor(Math.random() * suit.length)];
+        var randomNumber = number[Math.floor(Math.random() * number.length)];
+        var cardNumber = Number(randomNumber);
+      }
+
+      function showDealerHand(){
+         
+      }
