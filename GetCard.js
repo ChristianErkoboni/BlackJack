@@ -134,3 +134,22 @@ var dealerSecondCardNumber = 0;
         }, 0);
         document.getElementById("dealersAdd").innerHTML = sumOfDealerCards;
       }
+
+      function dealerTotalCard(){
+        /*var sumOfDealerCards = dealerTotal.reduce(function(a, b){
+          return a + b;
+        }, 0);
+        document.getElementById("dealersAdd").innerHTML = sumOfDealerCards; */
+        do {
+          dealerHit();
+          var sumOfDealerCards = dealerTotal.reduce(function(a, b){
+            return a + b;
+          }, 0);
+          document.getElementById("dealersAdd").innerHTML = sumOfDealerCards;
+        } while (sumOfDealerCards < 16)
+         
+        }
+      
+
+     
+    
