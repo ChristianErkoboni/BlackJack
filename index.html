@@ -9,16 +9,21 @@
   <body>
     <h1>Welcome to BlackJack</h1>
     <p>Click Get Card!</p>
-    <button id = "startButton" type="button" onclick="getfirstCard(); getsecondCard();">Start</button>
+    <button id = "startButton" type="button" onclick="getfirstCard(); getsecondCard(); dealersFirstCard();">Start</button>
     <button id = "hitButton" type="button" disabled onclick="hitCard()">Hit</button>
-    <button id = "stayButton" type="button" disabled onclick="stayPlayerGame()">Stay</button>
+    <button id = "stayButton" type="button" disabled onclick="stayPlayerGame(); dealersSecondCard();">Stay</button>
    <!---- <button id = "totalButton" disabled type="button" onclick="addCards()">Total</button>-->
     <button id = "resetGame" type="button" onclick="resetGame()">Reset</button>
-    <p>Player's Hand</p>
+    <p> <strong>Player's Hand</strong></p>
     <p id = "firstCard"></p>
     <p id = "secondCard"></p>
     <p id = "thirdCard"></p>
     <p id = "firstAdd"></p>
     <p id = "lostMessage"></p>
+    <p><strong>Dealers Hand</strong></p>
+    <p id = "dealersFirstCard"></p>
+    <p id = "dealersSecondCard"></p>
+    <p id = "dealersHitCard"></p>
+    <p id = "dealersAdd"></p>
   </body>
 </html>
