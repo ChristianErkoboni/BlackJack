@@ -1,6 +1,7 @@
 var suit = ["Hearts", "Spades", "Diamonds", "Clubs"];
-var number = ["2", "3", "4", "5", "6", "7", "8", "9", "10"];
+var number = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
 var faceCardandTens = ["10", "Jack", "Queen", "King"];
+var aces = ["Ace"];
 
 var firstCardNumber;
 var secondCardNumber;
@@ -24,7 +25,9 @@ var dealerNewCard = 0;
         document.getElementById("startButton").disabled = true;
         document.getElementById("hitButton").disabled = false;
         document.getElementById("stayButton").disabled = false;
-        if (firstCardNumber === 10){
+        if (firstCardNumber === 11){
+          document.getElementById("firstCard").innerHTML = "Ace" + " " + "of" + " " + randomSuit;
+        } else if (firstCardNumber === 10){
           var randomFaceCard = faceCardandTens[Math.floor(Math.random() * faceCardandTens.length)];
           document.getElementById("firstCard").innerHTML = randomFaceCard + " " + "of" + " " + randomSuit;
         } else {
@@ -39,11 +42,31 @@ var dealerNewCard = 0;
         //document.getElementById("secondCard").innerHTML = cardNumber + " " + "of" + " " + randomSuit;
         secondCardNumber = cardNumber;
         totalCardNumber.push(secondCardNumber);
-        if (secondCardNumber === 10){
+        if (secondCardNumber === 11){
+          document.getElementById("secondCard").innerHTML = "Ace" + " " + "of" + " " + randomSuit;
+        } else if (secondCardNumber === 10){
           var randomFaceCard = faceCardandTens[Math.floor(Math.random() * faceCardandTens.length)];
           document.getElementById("secondCard").innerHTML = randomFaceCard + " " + "of" + " " + randomSuit;
         } else {
           document.getElementById("secondCard").innerHTML = secondCardNumber + " " + "of" + " " + randomSuit;
+        }
+        var sumOfCards = totalCardNumber.reduce(function(a, b){
+          return a + b;
+        }, 0);
+        document.getElementById("firstAdd").innerHTML = sumOfCards;
+        if (sumOfCards === 21){
+          document.getElementById("message").innerHTML = "BlackJack!"
+          document.getElementById("hitButton").disabled = true;
+          document.getElementById("stayButton").disabled = true;
+        } else if (sumOfCards > 21){
+          var index = totalCardNumber.indexOf(11);
+            if (index !== -1){
+              totalCardNumber[index] = 1;
+              var sumOfCards = totalCardNumber.reduce(function(a, b){
+                return a + b;
+              }, 0);
+              document.getElementById("firstAdd").innerHTML = sumOfCards;
+            }
         }
       }
       
@@ -53,7 +76,9 @@ var dealerNewCard = 0;
         var randomNumber = number[Math.floor(Math.random() * number.length)];
         var cardNumber = Number(randomNumber);
         totalCardNumber.push(cardNumber);
-        if (cardNumber === 10){
+        if (cardNumber === 11){
+          document.getElementById("thirdCard").innerHTML = "Ace" + " " + "of" + " " + randomSuit;
+        } else if (cardNumber === 10){
           var randomFaceCard = faceCardandTens[Math.floor(Math.random() * faceCardandTens.length)];
           var textNode = document.createTextNode(randomFaceCard + " " + "of" + " " + randomSuit);
         p.appendChild(textNode);
@@ -72,10 +97,19 @@ var dealerNewCard = 0;
         }, 0);
         document.getElementById("firstAdd").innerHTML = sumOfCards;
 
-        if (sumOfCards >21){
-          document.getElementById("lostMessage").innerHTML = "You Went Over 21! Try Again.";
-          document.getElementById("hitButton").disabled = true;
-          document.getElementById("stayButton").disabled = true;
+        if (sumOfCards > 21){
+          var index = totalCardNumber.indexOf(11);
+            if (index !== -1){
+              totalCardNumber[index] = 1;
+              var sumOfCards = totalCardNumber.reduce(function(a, b){
+                return a + b;
+              }, 0);
+              document.getElementById("firstAdd").innerHTML = sumOfCards;
+            } else {
+              document.getElementById("lostMessage").innerHTML = "You Went Over 21! Try Again.";
+              document.getElementById("hitButton").disabled = true;
+              document.getElementById("stayButton").disabled = true;
+            }
         }
       }
       
