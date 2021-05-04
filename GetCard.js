@@ -118,7 +118,9 @@ var dealerNewCard = 0;
           document.getElementById("stayButton").disabled = true;
           var randomSuit = suit[Math.floor(Math.random() * suit.length)];
           //document.getElementById("dealersSecondCard").innerHTML = dealerSecondCardNumber + " " + "of" + " " + randomSuit;
-          if (dealerSecondCardNumber === 10){
+          if (dealerSecondCardNumber === 11){
+            document.getElementById("dealersSecondCard").innerHTML = "Ace" + " " + "of" + " " + randomSuit;
+          } else if (dealerSecondCardNumber === 10){
             var randomFaceCard = faceCardandTens[Math.floor(Math.random() * faceCardandTens.length)];
             document.getElementById("dealersSecondCard").innerHTML = randomFaceCard + " " + "of" + " " + randomSuit;
           } else {
@@ -128,6 +130,17 @@ var dealerNewCard = 0;
             return a + b;
           }, 0);
           document.getElementById("firstAdd").innerHTML = sumOfCards;
+          
+          if (sumOfDealerCards > 21){
+            var index = dealerTotal.indexOf(11);
+              if (index !== -1){
+                dealerTotal[index] = 1;
+                var sumOfDealerCards = dealerTotal.reduce(function(a, b){
+                  return a + b;
+                }, 0);
+                document.getElementById("dealersAdd").innerHTML = sumOfDealerCards;
+              } 
+          }
       }
 
       
@@ -140,7 +153,9 @@ var dealerNewCard = 0;
         //document.getElementById("dealersFirstCard").innerHTML = cardNumber + " " + "of" + " " + randomSuit;
         dealerFirstCardNumber = cardNumber;
         dealerTotal.push(dealerFirstCardNumber);
-        if (dealerFirstCardNumber === 10){
+        if (dealerFirstCardNumber === 11){
+          document.getElementById("dealersFirstCard").innerHTML = "Ace" + " " + "of" + " " + randomSuit;
+        } else if (dealerFirstCardNumber === 10){
           var randomFaceCard = faceCardandTens[Math.floor(Math.random() * faceCardandTens.length)];
           document.getElementById("dealersFirstCard").innerHTML = randomFaceCard + " " + "of" + " " + randomSuit;
         } else {
@@ -164,7 +179,9 @@ var dealerNewCard = 0;
         var cardNumber = Number(randomNumber);
         dealerNewCard = cardNumber;
         dealerTotal.push(dealerNewCard);
-        if (dealerNewCard === 10){
+        if (cardNumber === 11){
+          document.getElementById("dealersHitCard").innerHTML = "Ace" + " " + "of" + " " + randomSuit;
+        } else if (dealerNewCard === 10){
           var randomFaceCard = faceCardandTens[Math.floor(Math.random() * faceCardandTens.length)];
           var textNode = document.createTextNode(randomFaceCard + " " + "of" + " " + randomSuit);
         p.appendChild(textNode);
@@ -174,14 +191,24 @@ var dealerNewCard = 0;
         p.appendChild(textNode);
         document.getElementById("dealersHitCard").appendChild(p);
         }
-        /*var textNode = document.createTextNode(cardNumber + " " + "of" + " " + randomSuit);
-        p.appendChild(textNode);
-        document.getElementById("dealersHitCard").appendChild(p);
-        dealerTotal.push(cardNumber);*/
-        /*var sumOfDealerCards = dealerTotal.reduce(function(a, b){
+        var sumOfDealerCards = dealerTotal.reduce(function(a, b){
           return a + b;
         }, 0);
-        document.getElementById("dealersAdd").innerHTML = sumOfDealerCards; */
+       
+        document.getElementById("dealersAdd").innerHTML = sumOfDealerCards;
+
+        if (sumOfDealerCards > 21){
+          var index = dealerTotal.indexOf(11);
+            if (index !== -1){
+              dealerTotal[index] = 1;
+              var sumOfDealerCards = dealerTotal.reduce(function(a, b){
+                return a + b;
+              }, 0);
+              document.getElementById("dealersAdd").innerHTML = sumOfDealerCards;
+            } else {
+              document.getElementById("dealersLostMessage").innerHTML = "Dealer Went Over 21! You Win! Play Again";
+            }
+        }
     }
 
       
@@ -194,7 +221,7 @@ var dealerNewCard = 0;
         document.getElementById("dealersAdd").innerHTML = sumOfDealerCards;
       
       
-        while (sumOfDealerCards < 16){
+        while (sumOfDealerCards < 17){
           dealerHit();
           var sumOfDealerCards = dealerTotal.reduce(function(a, b){
             return a + b;
