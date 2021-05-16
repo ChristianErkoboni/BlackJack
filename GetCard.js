@@ -55,7 +55,7 @@ var dealerNewCard = 0;
         }, 0);
         document.getElementById("firstAdd").innerHTML = sumOfCards;
         if (sumOfCards === 21){
-          document.getElementById("message").innerHTML = "BlackJack!"
+          document.getElementById("message").innerHTML = "You Got BlackJack! You Win."
           document.getElementById("hitButton").disabled = true;
           document.getElementById("stayButton").disabled = true;
         } else if (sumOfCards > 21){
@@ -169,6 +169,25 @@ var dealerNewCard = 0;
         var cardNumber = Number(randomNumber);
         dealerSecondCardNumber = cardNumber;
         dealerTotal.push(dealerSecondCardNumber);
+        var sumOfCards = totalCardNumber.reduce(function(a, b){
+          return a + b;
+        }, 0);
+        var sumOfDealerCards = dealerTotal.reduce(function(a, b){
+          return a + b;
+        }, 0);
+        if (sumOfDealerCards === 21 && sumOfCards === 21){
+          document.getElementById("message") = "You and the Dealer Both have BlackJack!"
+          document.getElementById("hitButton").disabled = true;
+          document.getElementById("stayButton").disabled = true;
+        } else if (sumOfCards === 21){
+          document.getElementById("message") = "You have BlackJack!"
+          document.getElementById("hitButton").disabled = true;
+          document.getElementById("stayButton").disabled = true;
+        } else if (sumOfDealerCards === 21){
+          document.getElementById("message") = "The Dealer has BlackJack! You Lose."
+          document.getElementById("stayButton").disabled = true;
+          document.getElementById("hitButton").disabled = true;
+        }
       }
 
       
@@ -206,7 +225,7 @@ var dealerNewCard = 0;
               }, 0);
               document.getElementById("dealersAdd").innerHTML = sumOfDealerCards;
             } else {
-              document.getElementById("dealersLostMessage").innerHTML = "Dealer Went Over 21! You Win! Play Again";
+              document.getElementById("dealerLostMessage").innerHTML = "Dealer Went Over 21! You Win! Play Again";
             }
         }
     }
@@ -228,13 +247,9 @@ var dealerNewCard = 0;
           }, 0);
           document.getElementById("dealersAdd").innerHTML = sumOfDealerCards;
         }
-        if (sumOfDealerCards > 21){
-           document.getElementById("dealerLostMessage").innerHTML = "The Dealer Went Over 21! You Win!";
-
-        } else {
+        if (sumOfDealerCards >= 17 && sumOfDealerCards < 22){
           compareTotalCards();
         }
-        
       }
 
       function compareTotalCards(){
